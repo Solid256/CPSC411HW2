@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.content.Intent;
 
 public class StudentListAdapter extends BaseAdapter {
     @Override
@@ -63,6 +64,20 @@ public class StudentListAdapter extends BaseAdapter {
             curTextView.setText(Integer.toString(curStudent.GetCWID()));
         }
 
+        row_view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view){
+                Intent intent = new Intent(view.getContext(), DetailsActivity.class);
+
+                TextView CWIDView = view.findViewById(R.id.CWID);
+
+                String CWIDStr = CWIDView.getText().toString();
+
+                intent.putExtra("CWID", Integer.decode(CWIDStr));
+
+                view.getContext().startActivity(intent);
+            }
+        });
         return row_view;
     }
 }
